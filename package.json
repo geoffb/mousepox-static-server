@@ -1,0 +1,27 @@
+{
+  "name": "@mousepox/static-server",
+  "version": "0.1.0",
+  "description": "A dead simple, zero-dependency static file server for Node.js.",
+  "keywords": [
+    "static",
+    "server"
+  ],
+  "author": "Geoff Blair <geoff@mousepox.io>",
+  "license": "ISC",
+  "repository": "github:geoffb/mousepox-static-server",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint -c tslint.json 'lib/**/*.ts'",
+    "prepublish": "yarn lint && yarn build"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "tslint": "^5.19.0",
+    "typescript": "^3.5.3"
+  }
+}
