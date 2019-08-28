@@ -2,6 +2,8 @@
 
 A dead simple, zero-dependency static file server for [Node.js](https://nodejs.org/en/).
 
+[![Actions Status](https://github.com/geoffb/mousepox-static-server/workflows/Build/badge.svg)](https://github.com/geoffb/mousepox-static-server/actions)
+
 ## Quick Start
 
 ```ts
