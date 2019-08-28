@@ -17,10 +17,13 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint -c tslint.json 'lib/**/*.ts'",
-    "prepublish": "yarn lint && yarn build"
+    "prepublish": "yarn lint && yarn build",
+    "test": "tape 'tests/**/*.js'"
   },
   "devDependencies": {
     "@types/node": "^12.7.2",
+    "got": "^9.6.0",
+    "tape": "^4.11.0",
     "tslint": "^5.19.0",
     "typescript": "^3.5.3"
   }
