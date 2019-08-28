@@ -30,8 +30,9 @@ export class StaticServer {
   /** Root path of static resources to be served */
   private root: string;
 
+  /** Create a new StaticServer */
   constructor(root: string) {
-    this.root = root;
+    this.root = resolvePath(root);
     this.server = createServer((req, res) => this.handleRequest(req, res));
   }
 
@@ -43,19 +44,26 @@ export class StaticServer {
   /** Start listening for incoming messages */
   public listen(port: number) {
     this.server.listen(port);
-    console.info(`Server listening on port ${port}`);
+    console.info(`LISTEN: port=${port}, root=${this.root}`);
+  }
+
+  /** Stop server */
+  public stop() {
+    this.server.close();
   }
 
   /** Handle incoming message */
   private async handleRequest(request: IncomingMessage, response: ServerResponse) {
     // Massage incoming URL
-    let url = "index.html";
+    let url = "./index.html";
     if (request.url !== undefined && request.url !== "/") {
-      url = request.url;
+      url = `.${request.url}`;
     }
+    console.info(`REQUEST: ${url}`);
 
     // Resolve filename relative to static root
     const filename = resolvePath(this.root, url);
+    console.debug(`RESOLVED FILENAME: ${filename}`);
 
     // Serve file contents
     try {
@@ -67,12 +75,16 @@ export class StaticServer {
     } catch (e) {
       if (e.code === "ENOENT") {
         // File not found
+        const message = `NOT FOUND: ${url}`;
+        console.warn(message);
         response.writeHead(404);
-        response.end(`NOT FOUND: ${url}`);
+        response.end(message);
       } else {
         // An unexpected error occurred
+        const message = `ERROR: ${e.message}`;
+        console.error(message);
         response.writeHead(500);
-        response.end(`ERROR: ${e.message}`);
+        response.end(message);
       }
     }
   }
