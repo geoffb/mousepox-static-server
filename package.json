@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.7.2",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "tape": "^4.11.0",
     "tslint": "^5.19.0",
     "typescript": "^3.5.3"
