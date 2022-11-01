@@ -5,13 +5,12 @@ import { extname, resolve as resolvePath } from "path";
 /** Promisified wrapper of fs.readFile */
 function read(filename: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    readFile(filename, (err, data) => err ? reject(err) : resolve(data));
+    readFile(filename, (err, data) => (err ? reject(err) : resolve(data)));
   });
 }
 
 /** Simple static file server */
 export class StaticServer {
-
   /** File extensions mapped to MIME types */
   private mimeTypes: Map<string, string> = new Map([
     [".html", "text/html"],
@@ -53,7 +52,10 @@ export class StaticServer {
   }
 
   /** Handle incoming message */
-  private async handleRequest(request: IncomingMessage, response: ServerResponse) {
+  private async handleRequest(
+    request: IncomingMessage,
+    response: ServerResponse
+  ) {
     // Massage incoming URL
     let url = "./index.html";
     if (request.url !== undefined && request.url !== "/") {
@@ -72,7 +74,7 @@ export class StaticServer {
         "Content-Type": this.getContentType(filename),
       });
       response.end(data, "utf-8");
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === "ENOENT") {
         // File not found
         const message = `NOT FOUND: ${url}`;
@@ -99,5 +101,4 @@ export class StaticServer {
       return "application/octet-stream";
     }
   }
-
 }

@@ -16,14 +16,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "yarn build",
-    "test": "tape 'tests/**/*.js'"
+    "prepublish": "yarn build"
   },
   "devDependencies": {
-    "@types/node": "^12.7.2",
-    "got": "^9.6.0",
-    "tape": "^4.11.0",
-    "typescript": "^3.5.3"
+    "@types/node": "^18",
+    "typescript": "^4.8.4"
   },
   "publishConfig": {
     "access": "public"
